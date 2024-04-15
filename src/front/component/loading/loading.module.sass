@@ -1,0 +1,30 @@
+@import "@/front/styles/useful_variables"
+
+.container
+    width: 100%
+    height: 100%
+    display: flex
+    flex-direction: column
+    justify-content: center
+    align-items: center
+    color: $colorMintCreamWhite
+    .loding
+        width: 44.8px
+        height: 44.8px
+        border-radius: 50%
+        background: linear-gradient($colorTropicalIndigo 0 0), linear-gradient($colorTropicalIndigo 0 0), linear-gradient($colorAppleGreen 0 0), linear-gradient($colorAppleGreen 0 0), linear-gradient($colorPoppy 0 0), linear-gradient($colorPoppy 0 0), linear-gradient($colorSeletiveYellow 0 0), linear-gradient($colorSeletiveYellow 0 0), $colorTropicalIndigo
+        background-position: top left,bottom right
+        background-repeat: no-repeat
+        animation: colorful-f5f9ie 2.5s infinite
+
+    @keyframes colorful-f5f9ie
+      0%
+        background-size: 0 100%, 0 100%, 100% 0, 100% 0, 0 100%, 0 100%,100% 0, 100% 0
+      20%, 25%
+        background-size: 0 100%, 0 100%, 100% 0, 100% 0, 0 100%, 0 100%, 100% 50%, 100% 50%
+      45%, 50%
+        background-size: 0 100%, 0 100%, 100% 0, 100% 0, 50% 100%, 50% 100%, 100% 50%, 100% 50%
+      70%, 75%
+        background-size: 0 100%, 0 100%, 100% 50%, 100% 50%, 50% 100%, 50% 100%, 100% 50%, 100% 50%
+      95%, 100%
+        background-size: 50% 100%, 50% 100%, 100% 50%, 100% 50%, 50% 100%, 50% 100%, 100% 50%,100% 50%
