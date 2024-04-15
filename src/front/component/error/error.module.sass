@@ -1,0 +1,31 @@
+@import "@/front/styles/useful_variables"
+
+.container
+    width: 100vw
+    height: calc(100vh - $heightHeader)
+    margin-top: $heightHeader
+    display: flex
+    flex-direction: column
+    justify-content: center
+    align-items: center
+    position: absolute
+    top: 0
+    left: 0
+    background: $linearGradientBlack
+    z-index: 9999
+    .content
+      display: flex
+      flex-direction: column
+      justify-content: center
+      align-items: center
+      text-align: center
+      background-color: $colorCarmine
+      width: 15rem
+      height: 120px
+      -webkit-box-shadow: 7px 8px 0px -3px rgba(0,0,0,0.75)
+      -moz-box-shadow: 7px 8px 0px -3px rgba(0,0,0,0.75)
+      box-shadow: 7px 8px 0px -3px rgba(0,0,0,0.75)
+      p
+        color: $colorMintCreamWhite
+        font-size: clamp(1em, 0.5em + 3vw, 2em)
+        text-shadow: 1px 1px 2px $colorSeletiveYellow
