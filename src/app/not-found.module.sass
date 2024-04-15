@@ -1,0 +1,90 @@
+@import "@/front/styles/useful_variables"
+
+.container
+    width: 100%
+    height: 100vh
+    background-image: url("/galaxy.jpg")
+    justify-content: center
+    align-items: center
+    display: flex
+    .content
+        display: flex
+        background-color: red
+        flex-direction: column
+        align-items: center
+        justify-content: center
+        width: 50%
+        height: 60%
+        padding: 9%
+        background: rgba( 255, 255, 255, 0.5 )
+        box-shadow: 0 8px 32px 0 rgba( 31, 38, 135, 0.37 )
+        backdrop-filter: blur( 4.5px )
+        -webkit-backdrop-filter: blur( 4.5px )
+        border-radius: 100% 50% 100% 50%
+        border: 1px solid rgba( 255, 255, 255, 0.18 )
+        @media (max-width: 768px)
+            width: 90%
+            height: 60%
+        .title
+            animation: float 5s ease-in-out infinite
+            h1, h2, p
+                animation: appear 1s ease-out
+                animation: fadeInDown 1s
+                font-size: clamp(1em, 0.5em + 3vw, 3em)
+                text-align: center
+                color: $colorSeletiveYellow
+                text-shadow: 3px 2px 1px $colorOnixBlack
+        .button
+            a
+                color: $colorBlack
+                text-align: center
+            animation: appear 1s ease-out
+            font-size: 16px
+            font-weight: 200
+            letter-spacing: 1px
+            padding: 13px 20px 13px
+            outline: 0
+            border: 1px solid black
+            cursor: pointer
+            position: relative
+            background-color: rgba(0, 0, 0, 0)
+            user-select: none
+            -webkit-user-select: none
+            touch-action: manipulation
+            &:after
+                content: ""
+                background-color: $colorSeletiveYellow
+                width: 100%
+                z-index: -1
+                position: absolute
+                height: 100%
+                top: 7px
+                left: 7px
+                transition: 0.2s
+            &:hover:after
+                top: 0px
+                left: 0px
+                transform: translateY(-5px)
+                box-shadow: 0 10px 20px rgba(0, 0, 0, 0.2)
+            @media (min-width: 768px)
+                padding: 13px 50px 13px
+            @keyframes float
+                0%, 100%
+                    transform: translateY(0)
+                50%
+                    transform: translateY(-20px)
+            @keyframes appear
+                from
+                    opacity: 0
+                    transform: translateY(50px)
+                to
+                    opacity: 1
+                    transform: translateY(0)
+
+            @keyframes fadeInDown
+                from
+                    opacity: 0
+                    transform: translateY(-50px)
+                to
+                    opacity: 1
+                    transform: translateY(0)
