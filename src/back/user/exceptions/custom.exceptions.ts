@@ -2,7 +2,10 @@ import { BaseError } from "./baseError"
 
 export class CustomError extends BaseError {
 
-  constructor(public code: number, message: string) {
-    super(code, message)
+  public code: number;
+
+  constructor(code: number, message: string) {
+    super(message)
+    this.code = code
   }
 }
