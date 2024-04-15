@@ -1,0 +1,29 @@
+@import "@/front/styles/useful_variables"
+
+.container
+    margin-top: $heightHeader
+    width: 100%
+    max-height: 70%
+    display: flex
+    flex-direction: column
+    justify-content: center
+    align-items: center
+    color: $colorMintCreamWhite
+    .content
+        width: 100%
+        max-height: 100%
+        display: flex
+        flex-direction: column
+        justify-content: center
+        align-items: center
+        h1
+            padding: 3%
+            font-size: clamp(0.9em, 1em + 3vw, 2em)
+        .gridContainer
+            color: $colorSeletiveYellow
+            font-size: clamp(0.9em, 0.5em + 3vw, 1.5em)
+            text-shadow: 1px 1px 1.5px $colorBlack
+            width: 90%
+            display: flex
+            flex-direction: column
+            justify-content: space-between
