@@ -1,0 +1,68 @@
+@import "@/front/styles/useful_variables"
+
+.header
+    width: 100%
+    height: $heightHeader
+    display: flex
+    align-items: center
+    font-size: 1.2rem
+    padding: 0 4%
+    position: absolute
+    z-index: 2
+    justify-content: flex-start
+    backdrop-filter: blur(2px)
+    background: $linearGradientBlack
+    .containerLogo
+        padding-right: 2.5rem
+        @media (max-width: 300px)
+            padding-right: 0rem
+        .logo
+            font-size: clamp(1.75em, 1em + 3vw, 2.5em)
+            color: $colorMintCreamWhite
+            text-shadow: 3px 4px 2px rgba(0,0,0,0.13)
+            text-align: center
+            line-height: 63px
+            transition: .5s
+            &:before
+                transition: .5s
+                transform: scale(.9)
+                z-index: -1
+            &:hover::before
+                transform: scale(1.1)
+            &:hover
+                color: $colorSeletiveYellow
+                text-shadow: 0 0 5px $colorSeletiveYellow
+            @media (max-width: 411px)
+                font-size: clamp(0.75em, .9em + 3vw, 1em)
+            @media (max-width: 259px)
+                font-size: 0.5rem
+
+    .navList
+        display: flex
+        align-items: center
+        display: flex
+        margin: 0
+        padding: 0
+        .navItem
+            margin-left: 1.5rem
+            font-size: clamp(0.5em, 0.7em + 1vw, 1.25em)
+            align-items: center
+            display: flex
+            height: 100%
+            position: relative
+            transition: color .4s
+            .link
+                cursor: pointer
+                color: $colorMintCreamWhite
+                text-shadow: 3px 4px 2px rgba(0,0,0,0.13)
+                &:hover
+                    color: transparent
+                    text-shadow: -2px -2px 0px $colorSeletiveYellow
+                    transition: color .1s
+
+            .linkNoHover
+                color: $colorMintCreamWhite
+                text-shadow: 3px 4px 2px rgba(0,0,0,0.13)
+
+
+
