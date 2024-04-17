@@ -3,6 +3,7 @@ import { ErrorResponse } from "./types/errorResponse"
 
 export default async function fetchLoginUser(email: string, password: string) {
   const apiUrl = `${BASE_URL}/user/login`
+
   const response = await fetch(apiUrl, {
     method: "POST",
     headers: {
@@ -12,9 +13,8 @@ export default async function fetchLoginUser(email: string, password: string) {
   })
 
   if (!response.ok) {
-    const errorData: ErrorResponse  = await response.json()
-    
-    throw errorData
+    const errorData: ErrorResponse = await response.json()
+    throw new Error(errorData.message)
   }
 
   return response.json()

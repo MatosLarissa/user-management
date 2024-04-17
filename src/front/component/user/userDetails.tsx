@@ -1,54 +1,46 @@
 "use client"
 
-import { useState, useEffect } from "react"
-import fetchCheckToken from "@/front/service/endpoint/user/fetchCheckToken"
-import Loading from "../loading/loading"
-import ErrorComponent from "../error/error"
+import { useUserContext } from "@/front/context/useUserContext"
+import { useState } from "react"
 import style from "./userDetails.module.sass"
 import UserList from "./list/useList"
-import { useUserContext } from "@/front/context/useUserContext"
+import EditUserModal from "./modal/editUserModal"
+import fetchEditUser from "@/front/service/endpoint/user/fetchEditUser"
+import { UserEdit } from "@/front/service/endpoint/user/types/userEdit.type"
+import { useErrorContex } from "@/front/context/erroBoundary"
+import ResponseUser from "@/back/user/models/responses/responseUser"
 
 const UserDetails: React.FC = () => {
-  const { token, userData, setUserData } = useUserContext()
-  const [isLoading, setIsLoading] = useState(true)
-  const [error, setError] = useState<string | null>(null)
-  const [success, setSuccess] = useState<boolean>(false)
+  const { token, userData, setUserData, user, setUser, userObject } = useUserContext()
+  const [showModal, setShowModal] = useState(false)
 
-  useEffect(() => {
-    async function fetchUserData() {
-      setIsLoading(true)
+  const handleEditUser = async (editedUser: UserEdit) => {
+    setUser(editedUser)
+    console.log("editedUser", editedUser)
+    const userData:ResponseUser = await fetchEditUser(token, editedUser)
+    setUserData([userData.user])
+    setShowModal(false)
+  }
 
-      try {
-        const validUser = await fetchCheckToken(token)
-        setSuccess(true)
-        if(validUser){
-          setUserData(validUser)
-        }
-      } catch (error: any) {
-        setError(error.message)
-      } finally {
-        setIsLoading(false)
-      }
-    }
-
-    fetchUserData()
-  }, [setUserData, token])
-
-  useEffect(() => {
-    fetchCheckToken(token).then(setUserData)
-  }, [setUserData, token])
-
-
-  if (isLoading) return <Loading />
-
-  if (error) return <ErrorComponent message={error} />
+  const handleCloseModal = () => {
+    setShowModal(false)
+  }
 
   return (
     <div className={style.container}>
       <h1>Detalhes da sua conta</h1>
       {userData && (
         <div className={style.content}>
-          <UserList />
+          {showModal && (
+            <EditUserModal user={userObject} onSave={handleEditUser}  onClose={handleCloseModal}/>
+          )}
+          <UserList
+            token={token}
+            userData={userData}
+            setUserData={setUserData}
+            setUser={setUser}
+            setShowModal={setShowModal}
+          />
         </div>
       )}
     </div>

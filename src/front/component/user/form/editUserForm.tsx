@@ -15,8 +15,11 @@ const UserForm: React.FC<UserFormProps> = ({ user, onChange }) => {
     onChange(name, value)
   }
 
+
+
   return (
     <div className={style.form}>
+      <label htmlFor="firstName">Primeiro Nome:</label>
       <input
         className={style.formControl}
         type="text"
@@ -28,6 +31,8 @@ const UserForm: React.FC<UserFormProps> = ({ user, onChange }) => {
         placeholder="Nome"
         minLength={2}
       />
+
+      <label htmlFor="lastName">Último Nome:</label>
       <input
         className={style.formControl}
         type="text"
@@ -39,6 +44,8 @@ const UserForm: React.FC<UserFormProps> = ({ user, onChange }) => {
         placeholder="Sobrenome"
         minLength={2}
       />
+
+      <label htmlFor="birthDate">Aniversário:</label>
       <input
         className={style.formControl}
         type="date"
@@ -49,6 +56,8 @@ const UserForm: React.FC<UserFormProps> = ({ user, onChange }) => {
         autoComplete="off"
         placeholder="Data de Nascimento"
       />
+
+      <label htmlFor="email">Email:</label>
       <input
         className={style.formControl}
         type="text"
@@ -59,14 +68,15 @@ const UserForm: React.FC<UserFormProps> = ({ user, onChange }) => {
         autoComplete="off"
         placeholder="Email"
       />
+
+      <label htmlFor="password">Senha:</label>
       <input
         className={style.formControl}
         type="password"
         name="password"
-        value={user.password}
         onChange={handleInputChange}
         onPaste={(e) => e.preventDefault()}
-        autoComplete="new-password"
+        autoComplete="off"
         placeholder="Senha"
         minLength={6}
       />

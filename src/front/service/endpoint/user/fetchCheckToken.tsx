@@ -13,8 +13,6 @@ export default async function fetchCheckToken(token: string ) {
 
   if (!response.ok) {
     const errorData: ErrorResponse = await response.json()
-    
-
     throw errorData
   }
 

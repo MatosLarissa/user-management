@@ -1,6 +1,6 @@
+import { UserDataTokenManager } from "@/shared/utils/hashManager.util"
 import UserCreationInputDto from "../../shared/types/userCreationInput.dto"
 import UserInputUpdateDto from "../../shared/types/userInputUpdate.dto"
-import Authenticator from "../utils/authenticator.util"
 import BcryptEncrypt from "../utils/encrypt.util"
 import FormatDate from "../utils/format-date.util"
 import LinkGenerator from "../utils/generate-links.util"
@@ -21,31 +21,31 @@ export default class UserService {
   private readonly userRepository: IUserRepository;
   private readonly encrypt: BcryptEncrypt;
   private readonly formatDate: FormatDate;
-  private readonly generateAuthToken: Authenticator;
-
+  private readonly userDataTokenManager: UserDataTokenManager;
   private routers = [];
 
   constructor(
     userRepository: IUserRepository,
     encrypt: BcryptEncrypt,
     formatDate: FormatDate,
-    generateAuthToken: Authenticator,
+    userDataTokenManager: UserDataTokenManager,
     private readonly linkGenerator: LinkGenerator,
 
   ) {
     this.userRepository = userRepository
     this.encrypt = encrypt
     this.formatDate = formatDate
-    this.generateAuthToken = generateAuthToken
-    this.routers = this.linkGenerator.routes()
+    this.userDataTokenManager = userDataTokenManager
+    if (this.linkGenerator) {
+      this.routers = this.linkGenerator.routes()
+    }
   }
 
   async loginUser(input: UserLoginInputDto): Promise<ResponseUser> {
     console.log(`Starting login of user with email: ${input.email}`)
     const { email, password } = input
     try {
-      const userExists: IUser =
-        await this.userRepository.getUserByEmail(email)
+      const userExists: IUser = await this.userRepository.getUserByEmail(email)
 
       if (!userExists || userExists === null) {
         throw new UserNotFoundCustomException(email)
@@ -53,29 +53,25 @@ export default class UserService {
 
       const isPasswordValid: boolean = await this.encrypt.compare(
         password,
-        userExists.password,
+        userExists.password
       )
+
       if (!isPasswordValid) {
         throw new UserUnauthorizedCustomException()
       }
 
-      if (isPasswordValid) {
-        const date: Date = new Date(this.formatDate.toMySQL(new Date()))
-        const loginChangeDate: UserUpdateDto = {
-          id: userExists.id,
-          updatedAt: date,
-          lastLogin: date,
-        }
-
-        await this.userRepository.update(userExists, loginChangeDate)
-        const token: string = await this.generateAuthToken.createToken(userExists)
-
-        console.log("Authorized login")
-        return new ResponseCreateUser(userExists, token, this.routers)
-      } else {
-        console.log("Unauthorized login")
-        throw new UserUnauthorizedCustomException()
+      const date: Date = new Date(this.formatDate.toMySQL(new Date()))
+      const loginChangeDate: UserUpdateDto = {
+        id: userExists.id,
+        updatedAt: date,
+        lastLogin: date,
       }
+
+      const atualUser = await this.userRepository.update(userExists, loginChangeDate)
+      const token: string = this.userDataTokenManager.createUserToken(atualUser)
+
+      console.log("Authorized login")
+      return new ResponseCreateUser(userExists, token, this.routers)
     } catch (error) {
       console.log("Error login user")
       throw error
@@ -111,12 +107,10 @@ export default class UserService {
         lastLogin: date,
       })
 
-      console.log("newUser", newUser)
-
       const createdUser = await this.userRepository.create(newUser)
 
       if (createdUser) {
-        const token: string = await this.generateAuthToken.createToken(createdUser)
+        const token: string = await this.userDataTokenManager.createUserToken(createdUser)
         return new ResponseCreateUser(createdUser, token, this.routers)
       }
     } catch (error) {
@@ -182,7 +176,7 @@ export default class UserService {
     console.log("Starting update of user")
 
     try {
-      const tokenIsValid = await this.generateAuthToken.getTokenData(token)
+      const tokenIsValid = await this.userDataTokenManager.getUserData(token)
 
       if (!tokenIsValid) {
         throw new UserUnauthorizedCustomException()
@@ -229,7 +223,7 @@ export default class UserService {
       const updatedUser = await this.userRepository.update(userExists, newUser)
 
       if (updatedUser) {
-        const token: string = await this.generateAuthToken.createToken(updatedUser)
+        const token: string = await this.userDataTokenManager.createUserToken(updatedUser)
         console.log(`User with id ${updatedUser.id} updated`)
         return new ResponseCreateUser(updatedUser, token, this.routers)
       }
@@ -238,10 +232,10 @@ export default class UserService {
     }
   }
 
-  async checkToken(token: string): Promise<User[]> {
+  async checkToken(token: string): Promise<boolean> {
     console.log("Starting checkToken")
     try {
-      const tokenIsValid = await this.generateAuthToken.getTokenData(token)
+      const tokenIsValid = await this.userDataTokenManager.getUserData(token)
 
       if (!tokenIsValid) {
         throw new UserUnauthorizedCustomException()
@@ -252,8 +246,7 @@ export default class UserService {
       if (!userExists) {
         throw new UserNotFoundCustomException(tokenIsValid.id)
       }
-      const user = new User(userExists)
-      return [user]
+      return true
     } catch (error) {
       throw error
     }
@@ -262,7 +255,7 @@ export default class UserService {
   async refreshToken(token: string): Promise<string> {
     console.log("Starting update of user")
     try {
-      const tokenIsValid = await this.generateAuthToken.getTokenData(token)
+      const tokenIsValid = await this.userDataTokenManager.getUserData(token)
 
       if (!tokenIsValid) {
         throw new UserUnauthorizedCustomException()
@@ -274,7 +267,7 @@ export default class UserService {
         throw new UserNotFoundCustomException(tokenIsValid.id)
       }
 
-      return await this.generateAuthToken.createToken(userExists)
+      return await this.userDataTokenManager.createUserToken(userExists)
     } catch (error) {
       throw error
     }
@@ -284,7 +277,7 @@ export default class UserService {
     console.log(`Starting deletion of user with id: ${userId}`)
 
     try {
-      const tokenIsValid = await this.generateAuthToken.getTokenData(token)
+      const tokenIsValid = await this.userDataTokenManager.getUserData(token)
 
       if (!tokenIsValid) {
         throw new UserUnauthorizedCustomException()

@@ -16,6 +16,16 @@ export function formatDateToInput(date: Date | string) {
   return formattedDate
 }
 
+export function formatDateBRToInput(date: Date | string) {
+  const newDate = new Date(date)
+  const day = String(newDate.getUTCDate()).padStart(2, "0")
+  const month = String(newDate.getUTCMonth() + 1).padStart(2, "0")
+  const year = newDate.getUTCFullYear()
+  const formattedDate = `${day}/${month}/${year}`
+
+  return formattedDate
+}
+
 export function formatDatetoMySQL(date: Date) {
   const year = date.getFullYear()
   const month = (date.getMonth() + 1).toString().padStart(2, "0")

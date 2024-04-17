@@ -11,7 +11,7 @@ export default class UserPayloadDto {
 
   @IsDate()
   @IsNotEmpty()
-  readonly birthDate: Date;
+  readonly birthDate: string;
 
   @IsString()
   @IsNotEmpty()
