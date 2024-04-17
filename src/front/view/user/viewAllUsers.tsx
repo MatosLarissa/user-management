@@ -3,14 +3,24 @@
 import fetchUsers from "@/front/service/endpoint/user/fetchAllUsers"
 import { User } from "@/front/service/endpoint/user/types/user.type"
 import { useEffect, useState } from "react"
-import ErrorComponent from "../../error/error"
-import Loading from "../../loading/loading"
-import UsersList from "./usersLists"
+import Loading from "../../component/loading/loading"
+import UsersList from "../../component/user/list/usersLists"
+import { useErrorContex } from "@/front/context/erroBoundary"
+import { useUserContext } from "@/front/context/useUserContext"
+import { useRouter } from "next/navigation"
 
-export default function AllUsers() {
+export default function ViewAllUsers() {
+  const { setError } = useErrorContex()
   const [isLoading, setIsLoading] = useState(true)
-  const [error, setError] = useState<string | null>(null)
   const [users, setUsers] = useState<User[]>([])
+  const { token } = useUserContext()
+  const router = useRouter()
+
+  useEffect(() => {
+    if (!token) {
+      router.push("/login")
+    }
+  }, [token, router])
 
   useEffect(() => {
     async function fetchAndSetUsers() {
@@ -24,14 +34,13 @@ export default function AllUsers() {
       }
     }
     fetchAndSetUsers()
-  }, [])
+  }, [setError])
 
   useEffect(() => {
   }, [users])
 
   if (isLoading) return <Loading />
 
-  if (error) return <ErrorComponent message={error} />
 
   return <UsersList users={users} />
 }

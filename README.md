@@ -1,17 +1,21 @@
-<h1 align="center" color="069bfb">
-  <span color="red">Olá! Seja bem vindo(a) a User Management ! </span>
-<br /> <br />
+<h1 align="center" style="color:#069bfb;">
+  <span style="color:red;">Olá! Seja bem vindo(a) ao User Management!</span>
+</h1>
+<br />
 
 <p align="center">
   <img src="https://media3.giphy.com/media/v1.Y2lkPTc5MGI3NjExN3F5OG42OWVkMGd3YjJmOHg5dzRlZG45dHJlbWMydGM4a3pnZXRqOCZlcD12MV9pbnRlcm5hbF9naWZfYnlfaWQmY3Q9Zw/IgLIVXrBcID9cExa6r/giphy.gif" alt="Logo">
 </p>
-<h2>⚛️ Sobre o Projeto</h2> 
-<p>O cerne deste projeto é demonstrar a eficiência e versatilidade do Next.js, tanto no front-end quanto no back-end, proporcionando uma plataforma ágil e confiável para gerenciamento de usuários.</p> 
-<p>O objetivo deste projeto é apresentar um exemplo de como um site de e-commerce pode ser organizado e funcional. Destaco especialmente como um carrinho de compras pode ser dinâmico e eficiente, proporcionando uma experiência de usuário suave e agradável.
-</p>
-<br/>
+
+<h2>⚛️ Sobre o Projeto</h2>
+
+<p>O cerne deste projeto é demonstrar a eficiência e versatilidade do Next.js, tanto no front-end quanto no back-end, proporcionando uma plataforma ágil e confiável para gerenciamento de usuários.</p>
+<br />
+
 <h2>✨ Funcionalidades Principais</h2>
+
 <p>O sistema foi meticulosamente projetado para oferecer uma experiência de usuário segura e intuitiva, com funcionalidades como:</p>
+
 <ul>
   <li><strong>Criação de Usuário:</strong> Um processo simplificado para dar vida ao seu perfil.</li>
   <li><strong>Login Seguro:</strong> Acesso rápido e protegido com credenciais verificadas.</li>
@@ -21,10 +25,13 @@
   <li><strong>Exclusão de Conta:</strong> Autonomia para remover sua conta quando desejar.</li>
   <li><strong>Visualização de Usuários:</strong> Uma visão geral dos membros da plataforma, promovendo transparência e conexão.</li>
 </ul>
-<br/>
+
+<br />
 
 <h2>🚀 Tecnologias Empregadas</h2>
+
 <p>Este projeto é uma vitrine da inovação tecnológica, incorporando um arsenal de ferramentas de ponta:</p>
+
 <ul>
   <li><strong>Next.js 14:</strong> A escolha perfeita para uma experiência de usuário impecável com renderização híbrida.</li>
   <li><strong>React 18:</strong> A biblioteca de UI que traz interatividade e reatividade aos componentes do projeto.</li>
@@ -34,12 +41,13 @@
   <li>E uma gama diversificada de bibliotecas auxiliares que elevam o projeto a novas alturas.</li>
 </ul>
 
-<h2> 💻ﾠPré-requisitos </h2>
+<h2>💻 Pré-requisitos</h2>
 
-<p>Antes de começar você vai precisar ter instalado em sua máquina as seguintes ferramentas: o <a href="https://git-scm.com" target="_blank">Git</a> e o <a href="https://nodejs.org/en/" target="_blank">Node.js</a>.
-Além disso, é bom ter uma IDE para trabalhar com o código. Eu recomendo o <a href="https://code.visualstudio.com" target="_blank">VSCode</a>.</p><br/>
-  
-  <h2> 🚀ﾠRodando o projeto </h2>
+<p>Antes de começar você vai precisar ter instalado em sua máquina as seguintes ferramentas: o <a href="https://git-scm.com" target="_blank">Git</a> e o <a href="https://nodejs.org/en/" target="_blank">Node.js</a>. Além disso, é bom ter uma IDE para trabalhar com o código. Eu recomendo o <a href="https://code.visualstudio.com" target="_blank">VSCode</a>.</p>
+
+<br />
+
+<h2>🚀 Rodando o projeto</h2>
 
 ```bash
 # Clone este repositório
@@ -51,14 +59,14 @@ $ git clone git@github.com:MatosLarissa/user-management.git
 $ gh repo clone MatosLarissa/user-management
 # Acesse a pasta do projeto no terminal
 $ cd ./user-management
-# Instale Node.js
+# Instale as dependências
+$ npm install
 # Para iniciar o projeto
 $ npm run dev
 # O servidor iniciará na porta:3000 - acesse <http://localhost:3000>
 ```
-<br/>
-  
-<h2>🧑‍💻ﾠDesenvolvedora</h2>
+<br />
+<h2>🧑‍💻 Desenvolvedora</h2>
 <table align="center">
   <tr>
      <td align="center"><a href="https://github.com/MatosLarissa" target="_blank">
@@ -68,9 +76,9 @@ $ npm run dev
       <sub><a href="https://www.linkedin.com/in/larissa-matos-b5aa93127/" target="_blank">Linkedin</a></sub>
       <br />
     </td>
+  </tr>
 </table>
-<br/>
-  
+<br />
 <p align="center">
-  ⬆ﾠ<a href="#top"> Voltar para o topo</a>
+  ⬆️ <a href="#top">Voltar para o topo</a>
 </p>

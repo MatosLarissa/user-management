@@ -9,12 +9,15 @@ import { useUserContext } from "@/front/context/useUserContext"
 export default function Header() {
   const pathname = usePathname()
   const router = useRouter()
-  const { token, clearToken } = useUserContext()
+  const {clearToken, token } = useUserContext()
+  // const token = localStorage.getItem("userToken")
+
+  // if(token){
+  //   setToken(token)
+  // }
 
   function logout (){
     clearToken()
-    localStorage.removeItem("userToken")
-    router.refresh()
     router.push("/login")
   }
 

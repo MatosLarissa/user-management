@@ -23,9 +23,6 @@ export default class DataValidator {
     if (validateEmail(email) === false) {
       throw new CustomError(422, "Invalid email.")
     }
-    if (validatePassword(password) === false) {
-      throw new CustomError(422, "Invalid password, needs at least six characters, at least one letter and one number.")
-    }
     return true
   }
 
@@ -44,9 +41,6 @@ export default class DataValidator {
 
     if (validateEmail(email) === false) {
       throw new CustomError(422, "Invalid email.")
-    }
-    if (validatePassword(password) === false) {
-      throw new CustomError(422, "Invalid password, needs at least six characters, at least one letter and one number.")
     }
     if (validateDate(birthDate) === false) {
       throw new CustomError(422, "Invalid date of birth. Please enter in DD/MM/YYYY format.")

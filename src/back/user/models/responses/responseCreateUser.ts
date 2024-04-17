@@ -4,7 +4,7 @@ import IUser from "../../interfaces/user.interface"
 export default class ResponseCreateUser implements IUser {
   readonly id: string;
   readonly name: string;
-  readonly birthDate: Date;
+  readonly birthDate: string;
   readonly email: string;
   readonly password: string;
   readonly createdAt: string;

@@ -1,41 +1,13 @@
 @import "@/front/styles/useful_variables"
 
-.container
-  width: 100%
-  height: calc(100vh - $heightHeader)
-  display: flex
-  justify-content: center
-  align-items: center
-  padding: 2rem
-  background-color: rgba(0, 0, 0, 0.1)
-
-  .content
-    width: 100%
-    max-width: 330px
-    background: $colorTranparent
-    backdrop-filter: blur(10px)
-    border: 1px solid rgba(255,255,255,0.2)
-    box-shadow: 5px 5px 30px rgba(0,0,0,0.2)
-    border-radius: 5px
-    padding: 20px
-
-    h1
-      background: $colorTranparent
-      backdrop-filter: blur(10px)
-      border-top-left-radius: 5px
-      border-top-right-radius: 5px
-      color: $colorWhite
-      padding: 15px
-      margin: 0
-      text-align: center
-
-    .form
-      display: flex
-      flex-direction: column
-      gap: 10px
-      margin-top: 20px
-
-      .formControl
+.form
+    display: flex
+    flex-direction: column
+    gap: 10px
+    margin-top: 20px
+    gap: 10px
+    margin-top: 20px
+    .formControl
         background: rgba(255,255,255,0.9)
         backdrop-filter: blur(10px)
         border: none
@@ -44,48 +16,32 @@
         width: 100%
 
         &:focus
-          border-color: $colorCeda
-          box-shadow: 5px 5px 30px rgba(0,0,0,0.2)
+            border-color: $colorMintCreamWhite
+            box-shadow: 5px 5px 30px rgba(0,0,0,0.2)
+        label
+            color: $colorMintCreamWhite
 
-      button
-        background: $colorTranparent
-        backdrop-filter: blur(10px)
-        color: $colorWhite
-        border: none
-        border-radius: 5px
-        padding: 10px
-        width: 100%
-        cursor: pointer
-        margin-top: 5%
+        input[type="text"],
+        input[type="email"],
+        input[type="date"],
+        input[type="password"]
+            margin-bottom: 2%
+            border: none
+            background: transparent
+            border-bottom: 1px solid $colorOnixBlack
+            padding: 10px
+            width: 100%
+            color: $colorWhite
 
-        &:hover, &:focus
-          background: rgba(255, 255, 255, 0.1)
-          box-shadow: none
-
-      label
-        color: $colorWhite
-
-      input[type="text"],
-      input[type="email"],
-      input[type="date"],
-      input[type="password"]
-        margin-bottom: 2%
-        border: none
-        background: transparent
-        border-bottom: 1px solid rgba(255, 255, 255, 0.5)
-        padding: 10px
-        width: 100%
-        color: $colorWhite
-
-        &:focus
-          border-color: $colorCeda
-          box-shadow: 5px 5px 30px rgba(0, 0, 0, 0.2)
-      .create
-        display: flex
-        flex-direction: row-reverse
-        align-items: center
-        padding: 1% 0
-        font-size: clamp(0.75em, 1em + 3vw, 1.1em)
-        &:hover
-          color: $colorSeletiveYellow
-          text-shadow: 0 0 5px $colorSeletiveYellow
+            &:focus
+            border-color: $colorMintCreamWhite
+            box-shadow: 5px 5px 30px rgba(0, 0, 0, 0.2)
+        .login
+            display: flex
+            flex-direction: row-reverse
+            align-items: center
+            padding: 1% 0
+            font-size: clamp(0.75em, 1em + 3vw, 1.1em)
+            &:hover
+            color: $colorSeletiveYellow
+            text-shadow: 0 0 5px $colorSeletiveYellow

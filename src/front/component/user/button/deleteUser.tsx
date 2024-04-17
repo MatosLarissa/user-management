@@ -5,12 +5,13 @@ import ErrorComponent from "../../error/error"
 import style from "./deleteUser.module.sass"
 import { useUserContext } from "@/front/context/useUserContext"
 import { useRouter } from "next/navigation"
+import { useErrorContex } from "@/front/context/erroBoundary"
 
 const DeleteUserButton: React.FC<DeleteUserButtonProps> = ({ userId, onDeleteSuccess }) => {
   const router = useRouter()
   const { token, clearToken } = useUserContext()
   const [isLoading, setIsLoading] = useState(false)
-  const [error, setError] = useState<string | null>(null)
+  const { setError } = useErrorContex()
 
   const handleDeleteUser = async () => {
     setIsLoading(true)
@@ -33,7 +34,6 @@ const DeleteUserButton: React.FC<DeleteUserButtonProps> = ({ userId, onDeleteSuc
       <button onClick={handleDeleteUser} disabled={isLoading}>
         {isLoading ? "Excluindo..." : "Excluir conta"}
       </button>
-      {error && <ErrorComponent message={error} />}
     </div>
   )
 }

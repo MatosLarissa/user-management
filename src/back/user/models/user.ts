@@ -3,7 +3,7 @@ import IUser from "../interfaces/user.interface"
 export default class User implements IUser {
   id: string;
   name: string;
-  birthDate: Date;
+  birthDate: string;
   email: string;
   password: string;
   createdAt: string;

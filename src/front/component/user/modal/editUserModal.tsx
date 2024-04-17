@@ -13,7 +13,7 @@ interface EditUserModalProps {
   onClose: () => void;
 }
 
-const EditUserModal: React.FC<EditUserModalProps> = ({ user = {}, onSave, onClose }) => {
+const EditUserModal: React.FC<EditUserModalProps> = ({ user, onSave, onClose }) => {
   const { userObject = {} } = useUserContext()
 
   const [editedUser, setEditedUser] = useState<UserEdit>({
@@ -29,8 +29,7 @@ const EditUserModal: React.FC<EditUserModalProps> = ({ user = {}, onSave, onClos
       firstName: user.firstName || "",
       lastName: user.lastName || "",
       birthDate: formatDateToInput(user.birthDate) || "",
-      email: user.email || "",
-      password: user.password || ""
+      email: user.email || ""
     })
   }, [user])
 
